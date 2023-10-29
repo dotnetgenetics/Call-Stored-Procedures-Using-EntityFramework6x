@@ -1,0 +1,77 @@
+-- INSERT CUSTOMER STORED PROCEDURE
+
+Use testdb
+go
+
+Create Procedure InsertCustomer(@CompanyName nvarchar(40), 
+	@ContactName nvarchar(30), 
+	@Address nvarchar(60),
+	@Country nvarchar(15),
+	@Phone nvarchar(24))
+As
+Begin
+	Insert Into dbo.Customers (CompanyName, ContactName, [Address], Country, Phone) 
+		values (@CompanyName, @ContactName, @Address, @Country, @Phone)
+End
+==============================================================================
+-- UPDATE CUSTOMER STORED PROCEDURE
+Use testdb
+go
+
+Create Procedure UpdateCustomer
+   (@CustomerID int,
+    @CompanyName nvarchar(40), 
+	@ContactName nvarchar(30), 
+	@Address nvarchar(60),
+	@Country nvarchar(15),
+	@Phone nvarchar(24))
+As
+Begin
+	Update dbo.Customers
+			Set CompanyName = @CompanyName,
+				ContactName  = @ContactName,
+				[Address] = @Address,
+				Country = @Country,
+				Phone = @Phone
+	where CustomerID = @CustomerID	
+End
+
+Go
+=============================================================================
+-- Delete CUSTOMER STORED PROCEDURE
+Use testdb
+go
+
+Create Procedure DeleteCustomer
+   (@CustomerID int)
+As
+Begin
+	Delete from dbo.Customers where CustomerID = @CustomerID	
+End
+
+Go		
+==============================================================================
+-- Get CUSTOMER By ID STORED PROCEDURE
+Use testdb
+go
+
+Create Procedure GetCustomerById
+   (@CustomerID int)
+As
+Begin
+	Select * from dbo.Customers where CustomerID = @CustomerID	
+End
+
+Go		
+==============================================================================
+-- Get All CUSTOMERS STORED PROCEDURE
+Use testdb
+go
+
+Create Procedure GetAllCustomers
+As
+Begin
+	Select * from dbo.Customers 
+End
+
+Go
